@@ -1,0 +1,381 @@
+body { 
+    margin: 0;
+    padding: 0;
+}
+#map { 
+    position: absolute;
+    top: 0;
+    bottom: 0;width: 100%;
+}
+
+/* ------------------------- Menu --------------------------------- */
+.menu-overlay {
+    font: 12px Arial, Helvetica, sans-serif;
+    color: white; 
+    position: absolute;
+    width: 210px;
+    top: 0px;
+    right: 0px;
+    padding: 10px;
+}
+.menu-overlay .menu-overlay-inner {
+    box-shadow:0 1px 2px rgba(0, 0, 0, 0.10);
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+fieldset {
+    border-radius: 3px;
+}
+
+
+/* ------------------ Selecteur des fonds de carte -----------------*/
+#basemap-select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 8px 10px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 12roupx;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    /* image svg pour le curseur du Select */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+  }
+  
+#basemap-select:focus {
+    outline: none;
+    border-color: #aaa;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Stylise les <option> pour qu'ils aient le même fond et la même couleur que le <select> */
+#basemap-select option {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+#basemap-select option:hover {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+
+/* -----------------------------  Info ----------------------- */
+#infoContent {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.info-container {
+    display: flex;
+    align-items: center; /* Aligne verticalement */
+    justify-content: space-around;; /* Régulièrement répartis à l'intérieur du conteneur d'alignement le long de l'axe principal */
+    margin: 5% 0% 5% 0%;
+
+}
+
+#infoButton, #braButton {
+    background-color: #008CBA;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#infoButton:hover , #braButton:hover {
+    background-color: #007399;
+}
+
+/* Attribution d'un ordre spécifique aux éléments pour réordonner */
+.info-container #braButton {
+    order: 0;  /* Le bouton BRA en premier */
+}
+
+.info-container .mapboxgl-ctrl-group {
+    order: 1;  /* Le contrôle de navigation en second */
+    display: flex;
+    flex-direction: row;
+}
+
+.info-container #infoButton {
+    order: 2;  /* Le bouton Info en dernier */
+}
+
+.mapboxgl-ctrl-group {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+}
+
+.mapboxgl-ctrl-group button + button {
+    border-top: none;
+  }
+
+.mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon,
+.mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Au survol : couleur modifiée (ici on diminue l'inversion pour obtenir une teinte moins blanche) */
+.mapboxgl-ctrl-zoom-in:hover .mapboxgl-ctrl-icon,
+.mapboxgl-ctrl-zoom-out:hover .mapboxgl-ctrl-icon {
+    filter: brightness(0) invert(0.7) !important;
+}
+
+/* Au clic (état actif) : couleur modifiée différemment */
+.mapboxgl-ctrl-zoom-in:active .mapboxgl-ctrl-icon,
+.mapboxgl-ctrl-zoom-out:active .mapboxgl-ctrl-icon {
+    filter: brightness(0) invert(0.5) !important;
+}
+
+
+/* ----------------------- Legend --------------------------------- */
+.map-legend {
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px 15px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: 12px;
+    line-height: 1.5;
+    z-index: 1000;
+}
+
+.legend-color div span {
+    border: none;
+}
+
+.map-legend h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.map-legend div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 6px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.legend {
+    font-weight: bold;
+}
+
+/* Classe spécifique pour transformer l'élément en cercle */
+.legend-circle {
+    width: 15px;
+    height: 15px;
+    margin-left: 2.5px;
+    margin-right: 12.5px;
+    border-radius: 50%;
+}
+
+/* Classe spécifique pour transformer l'élément en ligne */
+.legend-courbes {
+    width: 15px;
+    height: 2px;
+    margin-left: 2.5px;
+    margin-right: 12.5px;
+}
+
+
+/* ------------------------------ Popup ----------------------------------- */
+.popup-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* ---------------------------- Cordinates -------------------------------- */
+#coordinates {
+    position: absolute;
+    bottom: 10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 5px; 
+    border-radius: 5px; 
+    font-family: Arial, sans-serif; 
+    font-size: 14px; 
+    z-index: 10;
+}
+
+
+/* ------------------------------ Logo ------------------------------------ */
+#logo {
+    position: absolute;
+    bottom: 5px;
+    left: 100px;
+    z-index: 10;
+}
+
+#logo img {
+    width: 100px;
+    height: auto;
+}
+
+
+/* ------------------- Geocoder très capricieux à surcharger ----------------- */
+.menu-overlay .menu-overlay-inner {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;       
+}
+
+.mapboxgl-ctrl-geocoder input {
+    color: white !important;
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.mapboxgl-ctrl-geocoder--suggestion {
+    color: white;               
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.mapboxgl-ctrl-geocoder .suggestions {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.mapboxgl-ctrl-geocoder .suggestions .active {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.mapboxgl-ctrl-geocoder .suggestions .active a {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Applique le fond transparent sur le conteneur principal du geocoder */
+.mapboxgl-ctrl-geocoder,
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 5px; 
+}
+
+/* S'assure que le champ de saisie hérite du même fond */
+.mapboxgl-ctrl-geocoder input {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    color: white;
+}
+
+/* Conserve le fond transparent lors du survol sur le <li> et le <a> */
+.mapboxgl-ctrl-geocoder .suggestions li:hover,
+.mapboxgl-ctrl-geocoder .suggestions li a:hover,
+.mapboxgl-ctrl-geocoder .suggestions li:focus,
+.mapboxgl-ctrl-geocoder .suggestions li a:focus {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Surcharge de la croix de suppression de texcte du geocoder */
+/* Pour rendre le bouton de clear (la croix) transparent en fond */
+.mapboxgl-ctrl-geocoder--button {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Pour forcer la couleur de l'icône de la croix en blanc */
+.mapboxgl-ctrl-geocoder--icon-close path {
+    fill: white !important;
+}
+
+/* S'assurer qu'au survol le bouton conserve le fond transparent */
+.mapboxgl-ctrl-geocoder--button:hover {
+    background: transparent !important;
+}
+
+
+/* -------------------------------- Titre de la carte ----------------------- */
+#map-title {
+    position: absolute;              
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: rgb(245, 236, 236);                    
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;                 
+    z-index: 1000;
+}
+
+
+/*---------------------------- Conteneur de la légende de la pente ------------------------------------*/
+#slopeLegend {
+    position: absolute;
+    top: 65%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 150px;
+    background: linear-gradient(135deg, #e67977, #8ebcd5);
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    z-index: 1000;
+    display: none;
+}
+
+/* Style des labels */
+.legend-label {
+    position: absolute;
+    right: 100%;
+    margin-right: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: bold;
+    /* text-shadow: 0 0 3px rgba(0,0,0,0.6); */
+}
+
+/* Label 45° */
+.legend-label-top {
+    top: 0;
+}
+
+/* Label 30° */
+.legend-label-30 {
+    top: 30%;
+}
+
+/* Label de 20° */
+.legend-label-20 {
+    top: 60%;
+}
+
+/* Label 0° */
+.legend-label-bottom {
+    bottom: 0;
+}
+
+

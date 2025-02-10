@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.3/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.3/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Sortie Col de Balaour</title>
+</head>
+<body>
+
+    <div id="map-title">Etude du risque avalanche - Sortie Laverq - LP SIG 30/01/2025</div>
+
+    <div id="map" class="map"></div>
+
+    <div id="menu" class="menu-overlay">
+        <div class='menu-overlay-inner'>
+            <div class ="info-container">
+                <button id="infoButton">Info</button>
+                <button id="braButton">BRA</button>
+            </div>
+            <fieldset>
+                <legend class="legend">Itineraires préparés</legend>
+                <div>
+                    <label><input type="checkbox" id="normalCheckbox" value="normal" checked> Normal</label><br>
+                    <label><input type="checkbox" id="secondaireCheckbox" value="secondaire" checked> Secondaire</label><br>
+                    <label><input type="checkbox" id="sportifCheckbox" value="sportif" checked> Sportif</label><br>
+                    <label><input type="checkbox" id="pointsCheckbox" value="points" checked> Points d'intérêt</label><br>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend class="legend">Couches</legend>
+                <div>
+                    <label><input type="checkbox" id="pentesCheckbox" value="pentes"> Pentes</label><br>
+                    <label><input type="checkbox" id="courbesCheckbox" value="courbes"> Courbes de niveaux 10m</label>
+                    <label><input type="checkbox" id="radarCheckbox" value="radar"> Précipitations totales</label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend class="legend">Itinéraire réalisé</legend>
+                <div>
+                    <label><input type="checkbox" id="parcoursMonteeCheckbox" value="parcours_montee" checked> Montée</label><br>
+                    <label><input type="checkbox" id="parcoursDescenteCheckbox" value="parcours_descente" checked> Descente</label><br>
+                    <label><input type="checkbox" id="pointsPhotosCheckbox" value="points_photos" checked> Photos du parcours</label><br>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend class="legend">Fond de carte</legend>
+                <div id="basemap-control" class="basemap-control legend">
+                    <select id="basemap-select">
+                      <option value="mapbox://styles/mapbox/streets-v11" selected>Streets</option>
+                      <option value="mapbox://styles/mapbox/outdoors-v11">Outdoors</option>
+                      <option value="mapbox://styles/mapbox/dark-v10">Dark</option>
+                      <option value="mapbox://styles/mapbox/satellite-v9">Satellite</option>
+                    </select>
+                  </div>
+            </fieldset>
+    
+            <!-- Zone de texte à afficher/cacher -->
+            <div id="infoContent">
+                <p>
+                    Cette carte contient les itinéraires préparés pour la sortie d'étude du risque avalanche.<br>
+                    La couche raster des pentes et la couche vecteur des courbes de niveau ont été concues depuis les données LIDAR de L'IGN.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="coordinates">
+        Coordonnées : <span id="coords"></span>
+    </div>
+
+    <!-- legend -->
+    <div id="legend" class="map-legend"></div>
+    
+    <!-- Légende de la pente (initialement cachée) -->
+    <div id="slopeLegend">
+        <div class="legend-label legend-label-top">&gt;45°</div>
+        <div class="legend-label legend-label-30">30°</div>
+        <div class="legend-label legend-label-20">20°</div>
+        <div class="legend-label legend-label-bottom">0°</div>
+    </div>
+
+    <a href="https://iut.univ-amu.fr/fr" target="_blank">
+        <div id="logo">
+            <img src="logo/logo_amu.png" alt="Logo">
+        </div>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
